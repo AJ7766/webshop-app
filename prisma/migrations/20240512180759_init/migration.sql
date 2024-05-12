@@ -21,7 +21,7 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Order" (
     "id" TEXT NOT NULL PRIMARY KEY,
-    "PricePaidinSEK" INTEGER NOT NULL,
+    "pricePaidInSEK" INTEGER NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
     "userId" TEXT NOT NULL,
