@@ -4,12 +4,12 @@ import db from "@/db/db";
 
 async function getSalesData() {
     const data = await db.order.aggregate({
-        _sum: { pricePaidinSEK: true },
+        _sum: { pricePaidInSEK: true },
         _count: true
     })
 
     return {
-        amount: data._sum.pricePaidinSEK || 0,
+        amount: data._sum.pricePaidInSEK || 0,
         numberOfSales: data._count
     }
 }
@@ -18,13 +18,13 @@ async function getUserData() {
     const [userCount, orderData] = await Promise.all([
         db.user.count(),
         db.order.aggregate({
-        _sum: { pricePaidinSEK: true },
+        _sum: { pricePaidInSEK: true },
         }),
     ])
 
     return {
         userCount,
-        averageValuePerPerson: userCount === 0 ? 0 : (orderData._sum.pricePaidinSEK)
+        averageValuePerPerson: userCount === 0 ? 0 : (orderData._sum.pricePaidInSEK)
     }
 }
 export default async function AdminDashboard() {
