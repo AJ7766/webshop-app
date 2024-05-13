@@ -17,5 +17,5 @@ export default function AdminLayout(
             <NavLink href="/admin/orders">Sales</NavLink>
         </Nav>
         <div className="container my-6">{children}</div>
-        </>
+        </>//it gets the conten from page.tsx from its export default function
 }
