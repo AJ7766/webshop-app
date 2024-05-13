@@ -3,7 +3,7 @@
 import db from "@/db/db"
 import { z } from "zod"
 import fs from "fs/promises"
-import { redirect } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 
 //the zod is checking if the file imported is a file.
 const fileSchema = z.instanceof(File, {message:"Required"})
@@ -49,7 +49,7 @@ export async function addProduct(prevState: unknown, formData: FormData){
             isAvailableForPurchase: false,
             name: data.name,
             description: data.description,
-            priceinSEK: data.priceInSEK,
+            priceInSEK: data.priceInSEK,
             filePath,
             imagePath
     },
@@ -64,3 +64,8 @@ export async function toggleProductAvailability(
     await db.product.update({where: {id}, 
         data:{isAvailableForPurchase}
     })}
+
+export async function deleteProduct(id:string){
+    const product = await db.product.delete({where: {id}})
+    if (product === null) return notFound()
+}
