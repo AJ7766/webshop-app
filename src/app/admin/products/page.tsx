@@ -31,6 +31,11 @@ async function ProductsTable() {
         },
         orderBy: { name: "asc" }
     })
+
+    if (products.length === 0) {
+        return <p>No products found</p>
+    }
+    
     return (
     <Table>
         <TableHeader>
@@ -59,7 +64,7 @@ async function ProductsTable() {
                     ):(
                     <>
                     <span className="sr-only">Unavailable</span>
-                    <XCircle/>
+                    <XCircle className="stroke-destructive"/>
                     </>
                     )}
                 </TableCell>
