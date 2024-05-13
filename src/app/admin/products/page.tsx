@@ -24,7 +24,7 @@ async function ProductsTable() {
         select: {
             id:true,
             name: true,
-            priceinSEK: true,
+            priceInSEK: true,
             isAvailableForPurchase: true,
             _count: {select: { orders: true} },
         },
@@ -63,7 +63,7 @@ async function ProductsTable() {
                     )}
                 </TableCell>
                 <TableCell>{product.name}</TableCell>
-                <TableCell>{product.priceinSEK}</TableCell>
+                <TableCell>{product.priceInSEK}</TableCell>
                 <TableCell>{product._count.orders}</TableCell>
                 <TableCell>
                     <DropdownMenu>
