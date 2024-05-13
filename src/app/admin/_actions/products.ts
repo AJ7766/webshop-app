@@ -20,7 +20,7 @@ const addSchema = z.object({
 })
 
 //this function takes a argument named formData in an instance of FormData
-export async function addProduct(formData: FormData){
+export async function addProduct(prevState: unknown, formData: FormData){
     //result = using previous addSchema to parse and valdiate the form data extracted from the passed argument formData. safeParse method returns a result of the object if its successfully parsed data or error information if validation fails.
     const result = addSchema.safeParse(Object.fromEntries(formData.entries()))
     //if validation fails, function returns an object containing information about form validation errors.
@@ -40,7 +40,7 @@ export async function addProduct(formData: FormData){
     await fs.writeFile(filePath, Buffer.from(await data.file.arrayBuffer()))
 
     await fs.mkdir("public/products", { recursive: true})
-    const imagePath = `products/${crypto.randomUUID()}-${data.image.name}`
+    const imagePath = `/products/${crypto.randomUUID()}-${data.image.name}`
     await fs.writeFile(`public${imagePath}`, Buffer.from(await data.image.arrayBuffer()))
 
     //this is responsible to create a new product using Prisma create method
@@ -56,3 +56,11 @@ export async function addProduct(formData: FormData){
 })
     redirect("/admin/products")
 }
+
+export async function toggleProductAvailability(
+    id:string,
+    isAvailableForPurchase: boolean
+){
+    await db.product.update({where: {id}, 
+        data:{isAvailableForPurchase}
+    })}
