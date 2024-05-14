@@ -19,6 +19,7 @@ const addSchema = z.object({
     image: imageSchema.refine(file => file.size >0 , "Required")
 })
 
+
 //this function takes a argument named formData in an instance of FormData
 export async function addProduct(prevState: unknown, formData: FormData){
     //result = using previous addSchema to parse and valdiate the form data extracted from the passed argument formData. safeParse method returns a result of the object if its successfully parsed data or error information if validation fails.
@@ -65,7 +66,57 @@ export async function toggleProductAvailability(
         data:{isAvailableForPurchase}
     })}
 
+const editSchema = addSchema.extend({
+        file: fileSchema.optional(),
+        image: imageSchema.optional()
+})
+
 export async function deleteProduct(id:string){
     const product = await db.product.delete({where: {id}})
     if (product === null) return notFound()
+        //fs=file system and unlink means it removes, in this case it removes the filepath and image from the product
+    await fs.unlink(product.filePath)
+    await fs.unlink(`public${product.imagePath}`)
+}
+
+export async function updateProduct(id: string, prevState: unknown, formData: FormData){
+    //result = using previous addSchema to parse and valdiate the form data extracted from the passed argument formData. safeParse method returns a result of the object if its successfully parsed data or error information if validation fails.
+    const result = editSchema.safeParse(Object.fromEntries(formData.entries()))
+    //if validation fails, function returns an object containing information about form validation errors.
+    if (result.success === false) {
+        return result.error.formErrors.fieldErrors
+    }
+    // if validation succedes the data is further processing
+    const data = result.data
+    const product = await db.product.findUnique({where: {id}})
+
+    if (product == null) return notFound()
+    
+    let filePath = product.filePath
+    //if there is a new data.file then delete the old filepath and add a new filepath
+    if (data.file != null && data.file.size > 0){
+        await fs.unlink(product.filePath)
+        filePath = `products/${crypto.randomUUID()}-${data.file.name}`
+        await fs.writeFile(filePath, Buffer.from(await data.file.arrayBuffer()))
+}
+    let imagePath = product.imagePath
+    if (data.image != null && data.image.size> 0){
+        await fs.unlink(`public${product.imagePath}`)
+        imagePath = `/products/${crypto.randomUUID()}-${data.image.name}`
+        await fs.writeFile(`public${imagePath}`, Buffer.from(await data.image.arrayBuffer()))
+    }
+
+    //this is responsible to update a new product using Prisma update method
+    await db.product.update({
+        where: {id},
+        data: {
+            isAvailableForPurchase: false,
+            name: data.name,
+            description: data.description,
+            priceInSEK: data.priceInSEK,
+            filePath,
+            imagePath
+    },
+})
+    redirect("/admin/products")
 }
