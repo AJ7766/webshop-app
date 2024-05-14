@@ -43,7 +43,7 @@ export function ProductForm({product}: {product?: Product | null}) {
             />
             {error.priceInSEK && <div className="text-destructive">{error.priceInSEK}</div>}
               <div className="text-muted-foreground">
-                    {`${priceInSEK} SEK`}
+                    {priceInSEK == undefined ? "SEK" : `${priceInSEK} SEK`}
                 </div>   
         </div>
         <div className="space-y-2">
