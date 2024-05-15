@@ -35,7 +35,7 @@ async function ProductsTable() {
     if (products.length === 0) {
         return <p>No products found</p>
     }
-    
+
     return (
     <Table>
         <TableHeader>
@@ -69,7 +69,7 @@ async function ProductsTable() {
                     )}
                 </TableCell>
                 <TableCell>{product.name}</TableCell>
-                <TableCell>{product.priceInSEK}</TableCell>
+                <TableCell>{product.priceInSEK} SEK</TableCell>
                 <TableCell>{product._count.orders}</TableCell>
                 <TableCell>
                     <DropdownMenu>
