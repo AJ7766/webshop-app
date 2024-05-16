@@ -107,10 +107,8 @@ export async function updateProduct(id: string, prevState: unknown, formData: Fo
     }
 
     //this is responsible to update a new product using Prisma update method
-    await db.product.update({
-        where: {id},
+    await db.product.update({where: {id},
         data: {
-            isAvailableForPurchase: false,
             name: data.name,
             description: data.description,
             priceInSEK: data.priceInSEK,
