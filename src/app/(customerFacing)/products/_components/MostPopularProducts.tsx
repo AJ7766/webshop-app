@@ -1,9 +1,9 @@
 import { ProductCard } from "@/components/ProductCard";
-import { getNewestProducts } from "../../page";
+import { getMostPopular } from "../../page";
 
-export async function ProductList(){
+export async function MostPopularProducts(){
     return(
-    (await getNewestProducts()).map(product =>(
+    (await getMostPopular()).map(product =>(
         <ProductCard key={`${product.id}`} {...product} />
     )
     )

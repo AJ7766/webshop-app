@@ -1,5 +1,5 @@
-import { NewestProducts } from "./_components/NewestProducts";
-import SortList from "./_actions/SortList";
+import SortList from "../_actions/SortList";
+import { MostPopularProducts } from "../_components/MostPopularProducts";
 
 export default async function ProductsPage(){
 
@@ -10,7 +10,7 @@ export default async function ProductsPage(){
     </div>
     <SortList />
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <NewestProducts />
+        <MostPopularProducts />
         </div>
 
 </div>

@@ -1,5 +1,5 @@
-import { NewestProducts } from "./_components/NewestProducts";
-import SortList from "./_actions/SortList";
+import SortList from "../_actions/SortList";
+import { NewestProducts } from "../_components/NewestProducts";
 
 export default async function ProductsPage(){
 
