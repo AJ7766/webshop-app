@@ -4,6 +4,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { Field, Select } from "@headlessui/react";
 import clsx from "clsx";
 import { ChangeEvent, useEffect, useState } from "react";
+import { Product } from "@prisma/client";
+import { ProductList } from "../_components/ProductList";
 
 
 export default function SortList(){
@@ -13,6 +15,7 @@ export default function SortList(){
     const handleSelectChange = async (event: ChangeEvent<HTMLSelectElement>) => {
         const newValue = event.target.value;
         setSelectedValue(newValue);
+        console.log(newValue)
     }
 
   // Update state based on URL path
@@ -25,27 +28,44 @@ export default function SortList(){
     }
   }, [pathname]);
 
-  type Product = {
-    id: string;
-    name: string;
-    priceInSEK: number;
-    filePath: string;
-    imagePath: string;
-    description: string;
-    isAvailableForPurchase: boolean;
-    createdAt: Date;
-    updatedAt: Date;
-  };
-
-  const [products, setProducts] = useState<Product[]>([]); // Initialize as empty array
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    fetch('api/products')
-     .then(response => response.json())
-     .then(setProducts)
-     .catch(error => console.error('Error fetching data:', error));
-}, []);
-console.log(products); // Moved outside of the useEffect hook
+    if(selectedValue === "most-popular"){
+    fetch('api/products/popularProducts')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data.products); // Log the fetched data
+        setProducts(data.products); // Assuming data is an array of products
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setProducts([]); // Set products to an empty array in case of error
+      });
+    }
+    else{
+      fetch('api/products/newProducts')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data.products); // Log the fetched data
+        setProducts(data.products); // Assuming data is an array of products
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setProducts([]); // Set products to an empty array in case of error
+      });
+    }
+  }, [selectedValue]);
 
     return(
         <>
@@ -72,15 +92,7 @@ console.log(products); // Moved outside of the useEffect hook
       </Field>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    <div>
-            {products.map(product => (
-                <div key={product.id}>
-                    <h2>{product.name}</h2>
-                    <p>Price: {product.priceInSEK}</p>
-                    {/* Render other product details here */}
-                </div>
-            ))}
-        </div>
+       <ProductList products={products}/>
         </div>
         </>
     )

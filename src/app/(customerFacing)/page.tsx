@@ -11,7 +11,6 @@ export function getNewestProducts(){
 }
 
 export function getMostPopular(){
-    //we are sorting for orders that is avaiable for purchase and sorting it by "desc"
     return db.product.findMany({where: {isAvailableForPurchase: true}, orderBy: {orders: {_count:"desc"}}, take:6})
 }
 
