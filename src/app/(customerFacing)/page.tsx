@@ -28,7 +28,7 @@ type ProductGridSectionProps = {
     title: string
     productsFetcher: () => Promise<Product[]>
 }
-async function ProductGridSection({title, productsFetcher}: ProductGridSectionProps){
+export async function ProductGridSection({title, productsFetcher}: ProductGridSectionProps){
     return (
     <div className="space-y-4">
         <div className="flex-gap-4">
