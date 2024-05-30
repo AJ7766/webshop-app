@@ -1,4 +1,5 @@
 import SortList from "./_actions/SortList";
+import DefaultProductList from "./_components/DefaultProductList";
 
 export default function ProductsPage(){
     return (
@@ -7,6 +8,7 @@ export default function ProductsPage(){
     <h2 className="text-3xl font-bold inline-block">Products</h2>
     </div>
     <SortList />
+    <DefaultProductList/>
 </div>
 
     )
