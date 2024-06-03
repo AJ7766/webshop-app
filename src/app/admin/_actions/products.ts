@@ -4,6 +4,7 @@ import db from "@/db/db"
 import { z } from "zod"
 import fs from "fs/promises"
 import { notFound, redirect } from "next/navigation"
+import { revalidatePath } from "next/cache"
 
 //the zod is checking if the file imported is a file.
 const fileSchema = z.instanceof(File, {message:"Required"})
@@ -55,6 +56,8 @@ export async function addProduct(prevState: unknown, formData: FormData){
             imagePath
     },
 })
+    revalidatePath("/")
+    revalidatePath("/products")
     redirect("/admin/products")
 }
 
@@ -64,7 +67,11 @@ export async function toggleProductAvailability(
 ){
     await db.product.update({where: {id}, 
         data:{isAvailableForPurchase}
-    })}
+        
+    })
+    revalidatePath("/")
+    revalidatePath("/products")
+}
 
 const editSchema = addSchema.extend({
         file: fileSchema.optional(),
@@ -77,6 +84,8 @@ export async function deleteProduct(id:string){
         //fs=file system and unlink means it removes, in this case it removes the filepath and image from the product
     await fs.unlink(product.filePath)
     await fs.unlink(`public${product.imagePath}`)
+    revalidatePath("/")
+    revalidatePath("/products")
 }
 
 export async function updateProduct(id: string, prevState: unknown, formData: FormData){
@@ -116,5 +125,7 @@ export async function updateProduct(id: string, prevState: unknown, formData: Fo
             imagePath
     },
 })
+    revalidatePath("/")
+    revalidatePath("/products")
     redirect("/admin/products")
 }

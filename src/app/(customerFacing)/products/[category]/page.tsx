@@ -3,26 +3,27 @@ import db from "@/db/db";
 import { notFound } from "next/navigation";
 import SortList from "../_actions/SortList";
 import { Product } from "@prisma/client";
+import { cache } from "@/lib/cache";
 
 const allowedCategories = [{ category: "mostPopular"}, { category: "newest"}]
 
-export async function getDatabase(id:string) {
-    const newestProducts: Promise<Product[]> = db.product.findMany({
+export const getDatabase = cache(async (id: string) => {
+    const newestProducts = db.product.findMany({
         where: { isAvailableForPurchase: true },
         orderBy: { createdAt: "desc" }
     });
-    
-    const mostPopularProducts: Promise<Product[]> = db.product.findMany({
-        where: {isAvailableForPurchase: true}, 
-        orderBy: {orders: {_count:"desc"}}, 
+
+    const mostPopularProducts = db.product.findMany({
+        where: { isAvailableForPurchase: true },
+        orderBy: { orders: { _count: "desc" } },
     });
 
-    if(id === "newest"){
-        return newestProducts
-    }else{
-        return mostPopularProducts
+    if (id === "newest") {
+        return newestProducts;
+    } else {
+        return mostPopularProducts;
     }
-}
+}, ["/products", "getDatabase"], {revalidate: 60*60*24}); // Use the function name and the id as key parts
 
 export function generateStaticParams(){
     const categoryNames = allowedCategories.map(item => item.category);
