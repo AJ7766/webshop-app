@@ -4,17 +4,6 @@ import { notFound } from "next/navigation";
 import SortList from "../_actions/SortList";
 import { Product } from "@prisma/client";
 
-function activeLink(){
-    const navMenu = document.getElementById("navMenu")
-    const links = document.querySelectorAll('a')
-
-    links.forEach(link => {
-        if (link.href.includes("/products")) {
-            link.classList.add("active");
-        }
-    });
-}
-
 const allowedCategories = [{ category: "mostPopular"}, { category: "newest"}]
 
 export async function getDatabase(id:string) {
