@@ -2,7 +2,6 @@ import { ProductCard } from "@/components/ProductCard";
 import db from "@/db/db";
 import { notFound } from "next/navigation";
 import SortList from "../_actions/SortList";
-import { Product } from "@prisma/client";
 import { cache } from "@/lib/cache";
 
 const allowedCategories = [{ category: "mostPopular"}, { category: "newest"}]
@@ -30,10 +29,10 @@ export function generateStaticParams(){
     return categoryNames
 }
 
-export default async function ProductList({params}: {params: {category:string}}){
+export default async function ProductList({params}: {params: {id:string}}){
     const staticParams = generateStaticParams();
-    const isCategoryValid = staticParams.includes(params.category);
-    const products = await getDatabase(params.category)
+    const isCategoryValid = staticParams.includes(params.id);
+    const products = await getDatabase(params.id)
 
     return (isCategoryValid ? 
         <div className="space-y-4">
