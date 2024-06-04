@@ -11,9 +11,12 @@ export function Nav({ children }: { children: ReactNode }) {
 }
 //here we pass in all the props from the element so lets say we have <NavLink "href="hej" then the href=hej would be passed in here, but we exclude the className with omit.
 export function NavLink(props: Omit<ComponentProps<typeof Link>, "className">) {
-    //a useHook that gets the pathName, if we use this export function in admin.tsx, then the pathName starts at admin, which is also the url
-    const pathName = usePathname()
-    const isActive = pathName === props.href;
+    const pathName = usePathname();
+    const activeLink = pathName.split("/")[1] || "";
+    const activeLinkWithSlash = "/" + activeLink;
+    const isActive = activeLinkWithSlash === props.href;
+
+
     //return a <link element with all the props(id, className etc...) in the className="(cn is a condition, so the default is the long text and the condition is, if the pathName(for example admin, users, products etc is === the prop.href then it has special styling"
     return <Link {...props} className={cn("p-4 hover:bg-secondary hover:text-secondary-foreground focus-visible:bg-secondary focus-visible:text-secondary-foregorund", isActive && "bg-background text-foreground")} /> 
 }

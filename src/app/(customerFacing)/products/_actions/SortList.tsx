@@ -9,12 +9,16 @@ import { ChangeEvent, useState } from "react";
 export default function SortList(){
     const pathName = usePathname()
     const router = useRouter()
-    const [selectedValue, setSelectedValue] = useState<string>("");
+
+    const [selectedValue, setSelectedValue] = useState<string>(() => {
+      const parts = pathName.split('/');
+      const category = parts[2];
+      return category || '';
+  });
 
     const handleSelectChange = async (event: ChangeEvent<HTMLSelectElement>) => {
         const newValue = event.target.value;
         setSelectedValue(newValue);
-        console.log(pathName)
         if(pathName === `/products`){
           router.replace(`${newValue}`)
         }

@@ -25,14 +25,14 @@ export default function CheckoutForm({product, clientSecret}: CheckoutFormProps)
         <Image src={product.imagePath} fill alt={product.name} className="object-contain"/>
     </div>
     <div>
-    <div className="text-lg">
-        {product.priceInSEK} SEK
-    </div>
     <h1 className="text-2xl font-bold">
         {product.name}
     </h1>
     <div className="line-clamp-3 text-muted-foreground">
         {product.description}
+    </div>
+    <div className="text-lg">
+        {product.priceInSEK} SEK
     </div>
         </div>
         </div>
