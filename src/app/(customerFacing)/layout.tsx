@@ -1,8 +1,5 @@
 "use client"
 import { Nav, NavLink } from "@/components/nav";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-
 
 export const dynamic ="force-dynamic"
 
