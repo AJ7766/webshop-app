@@ -6,7 +6,8 @@ import { randomUUID } from "crypto";
 type PurchaseReceiptEmailProps ={
     product:{
         name:string,
-        imagePath: string
+        imagePath: string,
+        description: string,
     },
     order:{ id: string; createdAt: Date; pricePaidInSEK: number},
     downloadVerificationId:string
@@ -15,7 +16,8 @@ type PurchaseReceiptEmailProps ={
 PurchaseReceiptEmail.PreviewProps = {
     product:{
         name: "Product Name",
-        imagePath: "/products/087b1eab-f26b-4a5c-b705-8286b967058c-wallpaepr.jpg"
+        imagePath: "/products/087b1eab-f26b-4a5c-b705-8286b967058c-wallpaepr.jpg",
+        description: "Some Description"
     },order:{
         id: crypto.randomUUID(),
         createdAt: new Date(),
