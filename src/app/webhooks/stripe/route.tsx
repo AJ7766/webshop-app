@@ -28,6 +28,7 @@ export async function POST(req: NextRequest){
 
         const {orders: [order] } = await db.user.upsert({where: {email}, create: userFields, update: userFields, select: { orders: {orderBy: {createdAt: "desc"}}}})
 
+        console.log(order)
         const downloadVerification = await db.downloadVerification.create({
             data: { productId, expiresAt: new Date(Date.now() + 1000*60*60*24)}
         })
