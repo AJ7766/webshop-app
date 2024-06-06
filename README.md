@@ -5,7 +5,7 @@ A fullt functional webshop created with Typescript, Next.js, SQLite(local), Pris
 
 *Delete/Add products
 
-*Functional payment
+*Functional payment ( you can "test" buy products with typing in "4242 4242 4242 4242" in the Card number section )
 
 *Customer management
 
@@ -26,5 +26,3 @@ You can also access the admin page with "/admin" after your baseURL:
 username: admin
 
 password: password
-
-you can "test" buy products with typing in "4242 4242 4242 4242" in the Card number section
