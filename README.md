@@ -17,9 +17,9 @@ There might be some error purchasing a product to register it to the database si
 You can run the file on programs like Visual Studio Code
 commands to run: 
 
-npm i next
+1. npm i next
 
-npm run dev
+2. npm run dev
 
 You can also access the admin page with "/admin" after your baseURL: 
 
