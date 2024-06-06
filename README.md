@@ -1,4 +1,4 @@
-A webshop created with Typescript, Next.js, Sqlite(local), Prisma and Stripe.
+A fullt functional webshop created with Typescript, Next.js, Sqlite(local), Prisma and Stripe.
 
 
 *Admin page
