@@ -1,6 +1,5 @@
 import { Body, Container, Head, Heading, Html, Preview, Tailwind } from "@react-email/components";
 import { OrderInformation } from "./_components/OrderInformation";
-import { randomUUID } from "crypto";
 import React from "react";
 import {Hr} from "@react-email/components"
 
