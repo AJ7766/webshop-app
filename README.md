@@ -1,7 +1,10 @@
 A webshop created with Typescript, Next.js, Sqlite(local), Prisma and Stripe.
+
 *Admin page
 *Delete/Add products
 *Functional payment
+*Customer management
+*Emails using Resend
 
 There might be some error purchasing a product to register it to the database since the webhooks isn't enabled unless I log in to my Stripe account.
 
