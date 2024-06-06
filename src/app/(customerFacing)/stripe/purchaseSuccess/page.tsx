@@ -29,7 +29,7 @@ export default async function PurchaseSuccess({searchParams}: {searchParams: {pa
     <h1 className="text-4xl font-bold">{isSuccess ? "Success!" : "Error "}</h1>
     <div className="flex gap-4 items-center">
     <div className="aspect-video flex-shrink-0 w-1/3 relative">
-        <Image src={product.imagePath} fill alt={product.name} className="object-contain"/>
+        <Image src={product.imagePath} fill alt={product.name} className="object-cover"/>
     </div>
     <div>
     <h1 className="text-2xl font-bold">
