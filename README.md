@@ -10,6 +10,7 @@ You can run the file on programs like Visual Studio Code
 you can also access the admin page with "/admin" after your baseURL: 
 
 username: admin
+
 password: password
 
 you can "test" buy products with typing in "4242 4242 4242 4242" in the Card number section
