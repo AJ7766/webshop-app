@@ -24,7 +24,7 @@ export default function CheckoutForm({product, clientSecret}: CheckoutFormProps)
     <div className="max-w-5xl w-full mx-auto space-y-8">
         <div className="flex gap-4 items-center">
     <div className="aspect-video flex-shrink-0 w-1/3 relative">
-        <Image src={product.imagePath} fill alt={product.name} className="object-contain"/>
+        <Image src={product.imagePath} fill alt={product.name} className="object-cover"/>
     </div>
     <div>
     <h1 className="text-2xl font-bold">
@@ -37,6 +37,9 @@ export default function CheckoutForm({product, clientSecret}: CheckoutFormProps)
         {product.priceInSEK} SEK
     </div>
         </div>
+        </div>
+        <div className="line-clamp-3 text-muted-foreground">
+            <p>Fill in "4242 4242 4242 4242" as your Card Number to test buy a product, a receipt will be sent to your Email!</p>
         </div>
     <Elements options={{clientSecret}} stripe={stripePromise}>
         <Form priceInSEK={product.priceInSEK} productId={product.id}/>

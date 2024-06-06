@@ -1,3 +1,4 @@
+import { formatPrice } from "@/actions/priceFormatter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import db from "@/db/db";
 
@@ -51,11 +52,11 @@ export default async function AdminDashboard() {
         <DashboardCard
             title="Sales"
             subtitle={`${salesData.numberOfSales} Orders`}
-            body={`${salesData.amount} SEK`} 
+            body={`${formatPrice(salesData.amount)}`} 
         />
         <DashboardCard
             title="Customer"
-            subtitle={`${userData.averageValuePerPerson} Average Value`}
+            subtitle={`Average Value: ${formatPrice(userData.averageValuePerPerson)}`}
             body={`${userData.userCount} Customers`} 
         />
         <DashboardCard

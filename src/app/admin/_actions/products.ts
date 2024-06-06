@@ -51,7 +51,7 @@ export async function addProduct(prevState: unknown, formData: FormData){
             isAvailableForPurchase: false,
             name: data.name,
             description: data.description,
-            priceInSEK: data.priceInSEK,
+            priceInSEK: data.priceInSEK*100,
             filePath,
             imagePath
     },

@@ -1,3 +1,4 @@
+import { formatPrice } from "@/actions/priceFormatter";
 import { Column, Img, Row, Section, Text, Button } from "@react-email/components"
 
 type OrderInformationProps = {
@@ -26,7 +27,7 @@ export function OrderInformation({order, product, downloadVerificationId}: Order
             </Column>
             <Column>
             <Text className="mb-0 text-gray-500 whitespace-nowrap text-nowrap mr-4">Price Paid</Text>
-                <Text className="mt-0 mr-4">{order.pricePaidInSEK/100} SEK</Text>
+                <Text className="mt-0 mr-4">{formatPrice(order.pricePaidInSEK)} SEK</Text>
             </Column>
         </Row>
     </Section>

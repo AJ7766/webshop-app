@@ -6,6 +6,7 @@ import db from "@/db/db";
 import { CheckCircle2, MoreVertical, XCircle } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { ActiveToggleDropdownItem, DeleteDropdownItem } from "./_components/ProductActions";
+import { formatPrice } from "@/actions/priceFormatter";
 
 
 export default function AdminProductsPage(){
@@ -69,7 +70,7 @@ async function ProductsTable() {
                     )}
                 </TableCell>
                 <TableCell>{product.name}</TableCell>
-                <TableCell>{product.priceInSEK} SEK</TableCell>
+                <TableCell>{formatPrice(product.priceInSEK)}</TableCell>
                 <TableCell>{product._count.orders}</TableCell>
                 <TableCell>
                     <DropdownMenu>

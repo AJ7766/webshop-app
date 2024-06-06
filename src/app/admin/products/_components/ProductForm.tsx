@@ -9,6 +9,7 @@ import { addProduct, updateProduct } from "../../_actions/products"
 import { useFormState, useFormStatus } from "react-dom"
 import { Product } from "@prisma/client"
 import Image from "next/image"
+import { formatPrice } from "@/actions/priceFormatter"
 
 export function ProductForm({product}: {product?: Product | null}) {
   const [error, action] = useFormState(product == null ? addProduct : updateProduct.bind(null, product.id), {})
