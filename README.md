@@ -14,7 +14,7 @@ A fullt functional webshop created with Typescript, Next.js, SQLite(local), Pris
 
 There might be some error purchasing a product to register it to the database since the webhooks isn't enabled unless I log in to my Stripe account.
 
-You can run the file on programs like Visual Studio Code
+You can run the project on programs like Visual Studio Code
 commands to run: 
 
 1. npm i next
